@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+// import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -11,7 +12,7 @@ class S102 {
     private void levelOrderHandler(TreeNode root, int level) {
 
         if (root == null) { return; }
-        if (ret.size() < level+1) {
+        if (ret.size() < level) {
             ret.add(new ArrayList<Integer>());
         }
         ret.get(level - 1).add(root.val);
@@ -25,7 +26,7 @@ class S102 {
         }
 
         levelOrderHandler(root, 1);
-
+        // Collections.reverse(ret);
         return ret;
     }
 
