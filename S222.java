@@ -14,7 +14,6 @@ class S222 {
     //         ptr = ptr.left;
     //     }
 
-
     //     Queue<TreeNode> que = new LinkedList<>();
     //     que.offer(root);
     //     int currSize;
