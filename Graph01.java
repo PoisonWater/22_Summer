@@ -13,29 +13,29 @@ import java.util.Queue;
 
 class Graph01 {
     public boolean validPath(int n, int[][] edges, int start, int end) {
-        
-        List<LinkedList<Integer>> graph=new ArrayList<>();
-        for(int i=0;i<n;i++)
-        {
+
+        List<LinkedList<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
             graph.add(new LinkedList<Integer>());
         }
-        for(int edge[]:edges)
-        {
+        for (int edge[] : edges) {
             graph.get(edge[0]).add(edge[1]);
             graph.get(edge[1]).add(edge[0]);
         }
-        
+
         boolean[] visited = new boolean[n];
         Queue<Integer> queue = new LinkedList<>();
 
         queue.offer(start);
 
         while (!queue.isEmpty()) {
-            
+
             // Get current node.
             int currNode = queue.poll();
             visited[currNode] = true;
-            if (end == currNode) { return true; }
+            if (end == currNode) {
+                return true;
+            }
 
             for (int integer : graph.get(currNode)) {
                 if (!visited[integer]) {
@@ -46,6 +46,6 @@ class Graph01 {
         }
 
         return false;
-        
+
     }
 }

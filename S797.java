@@ -11,7 +11,8 @@ class S797 {
         ret = new LinkedList<>();
         currPath = new LinkedList<>();
         graphCopy = graph;
-        // currPath.add(0);
+
+        // Recursion - Traversing a graph
         dfs(0);
         return ret;
     }
