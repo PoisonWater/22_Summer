@@ -2,9 +2,6 @@ package Twitter;
 // skipped
 // https://www.geeksforgeeks.org/largest-lexicographical-string-with-at-most-k-consecutive-elements/
 
-// Java solution for above approach
-import java.util.*;
-
 class GFG {
 
     // Function to find largest string
