@@ -1,4 +1,5 @@
 package Twitter;
+// https://leetcode.com/discuss/interview-question/373110/Twitter-or-OA-2019-or-New-Office-Design
 
 public class OfficeDesign {
     private int getMaxHeight(int startIndex, int endIndex, int startHeight, int endHeight) {
