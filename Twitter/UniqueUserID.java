@@ -1,3 +1,4 @@
+package Twitter;
 // https://leetcode-cn.com/problems/minimum-increment-to-make-array-unique/solution/ji-shu-onxian-xing-tan-ce-fa-onpai-xu-onlogn-yi-ya/
 // https://leetcode.com/discuss/interview-question/376581/Twitter-or-OA-2019-or-Unique-Twitter-User-Id-Set
 

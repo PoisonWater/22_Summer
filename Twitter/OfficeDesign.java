@@ -1,3 +1,4 @@
+package Twitter;
 // https://leetcode.com/discuss/interview-question/373110/Twitter-or-OA-2019-or-New-Office-Design
 
 public class OfficeDesign {

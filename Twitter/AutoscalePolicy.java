@@ -1,3 +1,4 @@
+package Twitter;
 // SKIPPED
 // https://leetcode.com/discuss/interview-question/376019/Twitter-or-OA-2019-or-Autoscale-Policy
 class AutoscalePolicy {
