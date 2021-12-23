@@ -6,7 +6,8 @@ public class S946 {
     public boolean validateStackSequences(int[] pushed, int[] popped) {
         
         // Validating Stack simulating Stack
-        Stack<Integer> stack = new Stack<>();
+        Stack<Integer> stack = new Stack<>()
+        ;
         
         stack.push(pushed[0]);
         int ptr = 1, ptrp = 0;
