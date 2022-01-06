@@ -3,6 +3,40 @@ package Meta;
 import java.util.Stack;
 
 public class S1249 {
+
+    // Revisited
+    // 由左到右删除')' 由右到左删除‘('
+    public String minRemoveToMakeValid0(String s) {
+        StringBuilder sb = new StringBuilder();
+        int ctr = 0; // Counting Unbalanced left parenthesis
+        
+        // remove )
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '(') {
+                ctr++;
+            } else if (c == ')') {
+                if (ctr == 0) {
+                    continue;
+                }
+                ctr--;
+            }
+            sb.append(c);
+        }
+        
+        // remove (
+        for (int i = sb.length() - 1; i >= 0 && ctr > 0; i--) {
+            char c = sb.charAt(i);
+            if (c == '(') {
+                sb.deleteCharAt(i);
+                ctr--;
+            }
+        }
+        
+        return sb.toString();
+        
+    }
+
     public String minRemoveToMakeValid(String s) {
         
         StringBuilder sb = new StringBuilder();

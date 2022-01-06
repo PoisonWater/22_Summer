@@ -5,6 +5,20 @@ import java.util.Arrays;
 class S1762 {
         
     // Use a copy of array to store data simulating LinkedList.addFirst();
+    // Revisit：注意用 array 和 copyOfRange 代替 List 省时间空间，还能使用addFirst！
+    public int[] findBuildings0(int[] heights) {
+        int max = -1, ptr = heights.length - 1;
+        int[] ret = new int[ptr+1];
+        
+        for (int i = heights.length - 1; i >= 0; i--) {
+            if (heights[i] > max) {
+                max = heights[i];
+                ret[ptr--] = i;
+            }
+        }
+        
+        return Arrays.copyOfRange(ret, ptr + 1, heights.length);
+    }
     
     public int[] findBuildings(int[] heights) {
         

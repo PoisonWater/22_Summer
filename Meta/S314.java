@@ -7,6 +7,60 @@ import java.util.List;
 import java.util.Queue;
 
 class S314 {
+
+    // Revisit: 用BFS 不用DFS！
+    public List<List<Integer>> verticalOrder1(TreeNode root) {
+    
+        List<List<Integer>> ret = new ArrayList<>();
+        if (root == null) {
+            return ret;
+        }
+        
+        // Key - Col; Value - list of nodes
+        HashMap<Integer, List<Integer>> map = new HashMap<>();
+        
+        Queue<TreeNode> queue = new LinkedList<>();
+        Queue<Integer> queueCol = new LinkedList<>();
+        
+        // Queue Init
+        queue.offer(root);
+        queueCol.offer(0);
+        
+        // BFS Tree
+        int min = 0, max = 0; // Note 1. 别忘加 min max 之后按顺序返回list
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                // 1. read current node and col
+                int currCol = queueCol.poll();
+                TreeNode currNode = queue.poll();
+                
+                // 2. add to map
+                map.putIfAbsent(currCol, new ArrayList<Integer>());
+                map.get(currCol).add(currNode.val);
+                
+                // 3. update queue using curr left right
+                if (currNode.left != null) {
+                    queue.offer(currNode.left);
+                    queueCol.offer(currCol - 1);
+                    min = min > (currCol - 1) ? (currCol - 1) : min;
+                } 
+                if (currNode.right != null) {
+                    queue.offer(currNode.right);
+                    queueCol.offer(currCol + 1);
+                    max = max < (currCol + 1) ? (currCol + 1) : max;
+                }
+            }
+        }
+        
+        // Gen Return
+        for (; min <= max; min++) {
+            ret.add(map.get(min)); // Note 2. 这里要按顺序返回list
+        }
+        
+        return ret;
+        
+    }
     
     // Can also use 2 queues to simulate the pair! Much faster!
     class Pair {

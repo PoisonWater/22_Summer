@@ -1,6 +1,35 @@
 package Meta;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Set;
+
+// Revisit 用 HashMap 更直观
+class SparseVector1 {
+    
+    HashMap<Integer, Integer> map = new HashMap<>();
+    // Key - index, Value - nonzero value
+    
+    SparseVector1(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                map.put(i, nums[i]);
+            }
+        }
+    }
+    
+	// Return the dotProduct of two sparse vectors
+    public int dotProduct(SparseVector1 vec) {
+        Set<Integer> set = vec.map.keySet();
+        int ret = 0;
+        for (Integer key : set) {
+            if (map.containsKey(key)) {
+                ret += map.get(key) * vec.map.get(key);
+            }
+        }
+        return ret;
+    }
+}
 
 class SparseVector {
     
