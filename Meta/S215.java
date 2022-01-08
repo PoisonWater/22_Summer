@@ -2,6 +2,48 @@ package Meta;
 
 import java.util.PriorityQueue;
 
+class S215R {
+
+    // QuickSelect Revisit: TODO: 重写quickSelect！
+    private void swap(int[] nums, int i1, int i2) {
+        int tmp = nums[i1];
+        nums[i1] = nums[i2];
+        nums[i2] = tmp;
+    }
+    
+    private int partition(int[] nums, int start, int end, int k) {
+        
+        // ！！！当不match的start end出现 说明该区间已经被sort好 且k在该区间！！！
+        if (start >= end) return nums[k-1]; 
+        
+        int pivot = nums[end--], i = start, j = start;
+        // i is the index of the place to swap
+        // j is the current traversed number
+        
+        while (j <= end) {
+            if (nums[j] > pivot) {
+                swap(nums, i++, j);
+            }
+            
+            j++;
+        }
+        
+        swap(nums, i, end+1);
+        if (i+1 == k) {
+            return pivot;
+        }
+        if (i + 1 < k) {
+            return partition(nums, i + 1, end+1, k);
+        }
+        return partition(nums, start, i - 1, k);
+        
+    }
+    
+    public int findKthLargest(int[] nums, int k) {
+        return partition(nums, 0, nums.length - 1, k);
+    }
+}
+
 public class S215 {
     public int findKthLargest(int[] nums, int k) {
         PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> (b - a));

@@ -1,5 +1,35 @@
 package Meta;
 
+import java.util.HashMap;
+
+class S236R {
+
+    // Revisit: 类似 LCA II 原方法更好
+    HashMap<TreeNode, TreeNode> map = new HashMap<>();
+    
+    private void buildMap(TreeNode node, TreeNode parent) {
+        if (node == null) {
+            return;
+        }
+        map.put(node, parent);
+        buildMap(node.left, node);
+        buildMap(node.right, node);
+    }
+    
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        buildMap(root, null);
+        
+        TreeNode p1 = p, p2 = q;
+        
+        while (p1 != p2) {
+            p1 = p1 == null ? q : map.get(p1);
+            p2 = p2 == null ? p : map.get(p2);
+        }
+        
+        return p1;
+    }
+}
+
 public class S236 {
 
     private TreeNode mergePt = null;

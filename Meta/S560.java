@@ -3,6 +3,33 @@ package Meta;
 import java.util.HashMap;
 
 class S560 {
+
+    // Revisit
+    public int subarraySumR(int[] nums, int k) {
+        int ctr = 0, sum = 0; // prefixSum
+        // key - all prefix sums; values - count of the prefix sum
+        HashMap<Integer, Integer> map = new HashMap<>();
+        
+        for (int i : nums) {
+            sum += i;
+            // examine the current sum == k?
+            if (sum == k) {
+                ctr++;
+            }
+            
+            // examine sum - k in hashMap's keys
+            if (map.containsKey(sum - k)) {
+                ctr += map.get(sum - k);
+            }
+            
+            // add current sum to map 
+            map.put(sum, map.getOrDefault(sum, 0) + 1);
+            
+        }
+        
+        return ctr;
+        
+    }
     
     // https://www.youtube.com/watch?v=fFVZt-6sgyo&ab_channel=NeetCode
     

@@ -1,5 +1,45 @@
 package Meta;
 
+class S408R {
+    public boolean validWordAbbreviation(String word, String abbr) {
+        
+        int wPtr = 0, aPtr = 0, ctr = 0;
+        
+        while (wPtr < word.length() && aPtr < abbr.length()) {
+            char wc = word.charAt(wPtr), ac = abbr.charAt(aPtr);
+            
+            // Digits:
+            // leading 0:
+            if (ctr == 0 && ac == '0') {
+                return false;
+            }
+            if (Character.isDigit(ac)) {
+                while (Character.isDigit(ac)) {
+                    ctr = 10 * ctr + (ac - '0');
+                    if (++aPtr < abbr.length()) {
+                        ac = abbr.charAt(aPtr);
+                    } else {
+                        // 注意终止为数字的结束条件!
+                        break; // break 该 while loop，在后面又给wptr加ctr了
+                    }
+                }
+                wPtr += ctr;
+                ctr = 0; // 别忘归0
+                continue;
+            }
+            
+            if (wc != ac) {
+                return false;
+            }
+            wPtr++;
+            aPtr++;
+        }
+        
+        return wPtr == word.length() && aPtr == abbr.length();
+        
+    }
+}
+
 public class S408 {
 
     // Simpler two pointer + while approach

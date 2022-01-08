@@ -32,6 +32,7 @@ package Meta;
 
 class S339 {
     
+    // Revisited
     public int depthSum(List<NestedInteger> nestedList) {
         
         int ret = 0;

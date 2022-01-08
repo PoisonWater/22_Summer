@@ -1,5 +1,38 @@
 package Meta;
 
+import java.util.Arrays;
+import java.util.Random;
+
+// Revisit:
+// 1. Arrays.binarySearch();
+// 2. PrefixSum
+class S528Revisit {
+    
+    private int[] prefix;
+    private int maxVal;
+    private Random random;
+    public S528Revisit(int[] w) {
+        this.prefix = w;
+        for(int i = 1; i < w.length; i++)
+          w[i] += w[i-1];
+      
+        this.maxVal = w[w.length-1];
+        this.random = new Random();
+    }
+    
+    public int pickIndex() {
+        int key = random.nextInt(this.maxVal)+1; // 注意 range 左闭右开
+        // https://blog.csdn.net/jhl8105/article/details/38264749
+        // index < 0 : 没有match，第一个空档为-1，第二个为-2 以此类推。
+        // index >= 0: 有match在index；
+        int index = Arrays.binarySearch(this.prefix, key);
+        if(index < 0)
+          return -index-1;
+        else
+          return index;
+    }
+}
+
 class S528 {
 
     private int[] prefixSum;
