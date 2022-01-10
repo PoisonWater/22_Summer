@@ -2,6 +2,87 @@ package Meta;
 
 import java.util.HashMap;
 
+class LRUCache0 {
+    
+    // Revisit
+    // TODO: Helper functions
+    // 1. remove(int key)
+    // 2. moveToHead(DNode node)
+    // 3. addNode(DNode node) - addAfterHead
+
+    // 存 key 和 val
+    class DNode {
+        int key, val;
+        DNode next, prev;
+        public DNode() {}
+        public DNode(int key, int val) {
+            this.key = key;
+            this.val = val;
+        }
+    }
+    
+    // 注意这里value是DNODE！！！
+    HashMap<Integer, DNode> map = new HashMap<>();
+    DNode head, tail;
+    int size = 0, capacity;
+
+    public LRUCache0(int capacity) {
+        this.capacity = capacity;
+        head = new DNode();
+        tail = new DNode();
+        head.next = tail;
+        tail.prev = head;
+    }
+    
+    private void remove(int key) {
+        DNode toRem = map.get(key);
+        map.remove(key);
+        toRem.prev.next = toRem.next;
+        toRem.next.prev = toRem.prev;
+        size--;
+    }
+    
+    public int get(int key) {
+        
+        // 注意可能找不到！！！
+        if (!map.containsKey(key)) { return -1; }
+        
+        int val = map.get(key).val;
+        
+        remove(key);
+        put(key, val);
+        
+        return val;
+    }
+    
+    public void put(int key, int value) {
+        
+        if (!map.containsKey(key)) {
+            // DNode
+            DNode toAdd = new DNode(key, value);
+            toAdd.next = head.next;
+            toAdd.prev = head;
+            head.next = toAdd;
+            toAdd.next.prev = toAdd;
+
+            // map
+            map.put(key, toAdd);
+            size++;
+            
+            if (size > capacity) {
+                remove(tail.prev.key);
+            }
+
+        } else {
+            remove(key);
+            put(key, value);
+        }
+
+    }
+}
+
+
+
 class LRUCache {
     
     class Node{

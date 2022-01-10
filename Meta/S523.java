@@ -3,6 +3,7 @@ package Meta;
 import java.util.HashMap;
 
 public class S523 {
+    // prefix sum
     public boolean checkSubarraySum(int[] nums, int k) {
         
         int[] sum = new int[nums.length+1];

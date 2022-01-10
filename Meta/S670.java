@@ -1,6 +1,47 @@
 package Meta;
 
 public class S670 {
+
+    // Revisit
+    public int maximumSwap1(int num) {
+        // Last Index:
+        char[] numChars = String.valueOf(num).toCharArray();
+        int[] last = new int[]{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+        for (int i = 0; i < numChars.length; i++) {
+            last[numChars[i] - '0'] = i;
+        }
+        int[] first = new int[]{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+        for (int i = numChars.length-1; i >= 0; i--) {
+            first[numChars[i] - '0'] = i;
+        }
+        
+        // swap biggest number with the frontest number smaller than it
+        int ind;
+        for (int i = 9; i >= 0; i--) {
+            if (last[i] == -1) {
+                continue;
+            }
+            ind = last[i];
+            for (int j = i-1; j >= 0; j--) {
+                if (first[j] == -1) {
+                    continue;
+                }
+                if (first[j] < ind) {
+                    ind = first[j];
+                }
+            }
+            if (ind < last[i]) {
+                char tmp = numChars[ind];
+                numChars[ind] = numChars[last[i]];
+                numChars[last[i]] = tmp;
+                return Integer.parseInt(String.valueOf(numChars));
+            }
+        }
+        
+        return num;
+        
+    }
+
     // 后面有更繁琐但更直观的解释
 
     // Similar but simpler idea:

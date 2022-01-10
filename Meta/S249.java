@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class S249 {
+
+    // Revisited
     // use String id as key of the hashmap
     // key: 1&1& (abc & bcd)
     private String genId(String str) {

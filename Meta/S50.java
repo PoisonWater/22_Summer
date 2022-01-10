@@ -2,6 +2,35 @@ package Meta;
 
 public class S50 {
 
+    // Revisit : Recursion 更直观 OlogN OlogN
+    public double myPow1(double x, int n) {
+        // x == 0;
+        if (x == 0) { return 0; }
+        // n < 0;
+        if ( n < 0 ) {
+            return getPow(1/x, -n - 1) * 1 / x;
+        }
+        return getPow(x, n);
+    }
+    
+    private double getPow(double x, int n) {
+        if (n == 0) {
+            return 1;
+        }
+        if (n == 1) {
+            return x;
+        }
+        
+        double ret = getPow(x, n / 2);
+        
+        if (n % 2 == 1) {
+            return x * ret * ret;
+        } 
+        
+        return ret * ret;
+        
+    }
+
     // https://leetcode-cn.com/problems/powx-n/solution/50-powx-n-kuai-su-mi-qing-xi-tu-jie-by-jyd/
     public double myPow(double x, int n) {
 

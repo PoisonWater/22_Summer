@@ -22,6 +22,33 @@ class Node {
 
 public class S133 {
 
+    // Revisit
+    Node[] visited = new Node[101];
+    
+    public Node cloneGraph1(Node node) {
+        if (node == null) {
+            return null;
+        }
+        
+        // assign the visited map
+        Node curr = new Node(node.val);
+        curr.neighbors = new ArrayList<>();
+        visited[node.val] = curr;
+        
+        // fill in neighbors
+        for (Node n : node.neighbors) {
+            if (visited[n.val] == null) {
+                curr.neighbors.add(cloneGraph(n));
+            } else {
+                curr.neighbors.add(visited[n.val]);
+            }
+        }
+        
+        return curr;
+    }
+
+
+    
     Node[] map = new Node[101]; // Keeps track of the new nodes
     
     public Node cloneGraph(Node node) {
