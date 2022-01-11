@@ -5,6 +5,50 @@ import java.util.Queue;
 
 public class S1091 {
 
+    // Revisited
+    // Graph BFS - Better with A*
+    public int shortestPathBinaryMatrix1(int[][] grid) {
+    
+        // CORNER Cases!!!
+        if (grid[0][0] == 1) { return -1; }
+        
+        // graph BFS Init:
+        Queue<int[]> queue = new LinkedList<>(); // Storing step-wise path information in queue
+        queue.offer(new int[]{0, 0});
+        boolean[][] visited = new boolean[grid.length][grid[0].length];
+        int step = 0, mB = grid.length - 1, nB = grid[0].length - 1;
+        
+        // 注意二维数组快速初始方式！！
+        int[][] dirs = new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
+        
+        // Start BFS:
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            step++;
+            for (int i = 0; i < size; i++) {
+                int[] curr = queue.poll();
+                
+                // Reaching target node
+                if (curr[0] == mB && curr[1] == nB) {return step;}
+                
+                // update queue with eligible nodes
+                for (int[] dir : dirs) {
+                    // 这里定义curr[1]+dir[1]变量会好很多
+                    if (curr[0]+dir[0] < 0 || curr[1]+dir[1] < 0 || curr[0]+dir[0] > mB || curr[1]+dir[1] > nB
+                        || grid[curr[0]+dir[0]][curr[1]+dir[1]] == 1 || visited[curr[0]+dir[0]][curr[1]+dir[1]]) {
+                        continue;
+                    }
+                    queue.offer(new int[]{curr[0]+dir[0], curr[1]+dir[1]});
+                    visited[curr[0]+dir[0]][curr[1]+dir[1]] = true; // 记得 update visited！！！
+                }
+                
+            }
+        }
+        
+        return -1;
+        
+    }
+
     // Graph BFS on matrix
     public int shortestPathBinaryMatrix(int[][] grid) {
         

@@ -2,6 +2,42 @@ package Meta;
 
 public class S1011 {
 
+    // Revisit - 注意binary search限制bound！！！
+    public int shipWithinDaysR(int[] weights, int days) {
+        
+        // Get lo hi bound for bin search
+        // 注意：binary search的bound必须严格！不然容易超bound！不要怕麻烦！
+        int lo = 1, hi = 25000000;
+        
+        for (int w : weights) { // lo 必须大于等于货物最大值！
+            lo = Math.max(lo, w);
+        }
+        
+        // bin search
+        while (lo <= hi) {
+            // get travel days - actual
+            int estDay = 0, cap = 0, mid = (lo + hi) / 2;
+            for (int w : weights) {
+                if (cap + w > mid) { // 没有限制lo 可能在这里超出范围并将w归零！
+                    estDay++;
+                    cap = 0;
+                }
+                cap += w; // 别忘更新船上装的货物重量
+            }
+            estDay++;
+            
+            // update lo hi
+            if (estDay > days) {
+                lo = mid + 1;
+            } else {
+                hi = mid - 1;
+            }
+        }
+        
+        return lo;
+        
+    }
+
     // Binary Search
     private boolean canShip(int[] weights, int days, int cap) {
         int curr = 0, ships = 0;

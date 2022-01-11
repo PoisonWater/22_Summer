@@ -5,6 +5,35 @@ import java.util.Comparator;
 
 public class S791 {
 
+    // Revisit
+    public String customSortString0(String order, String s) {
+        // Construct map - storing occurances
+        int[] map = new int[26];
+        for (char c : s.toCharArray()) {
+            map[c-'a']++;
+        }
+        
+        // get Order
+        StringBuilder sb = new StringBuilder();
+        for (char o : order.toCharArray()) {
+            int times = map[o - 'a'];
+            for (int i = 0; i < times; i++) {
+                sb.append(o);
+            }
+            map[o - 'a'] = 0;
+        }
+        // All other chars out of order
+        for (int i = 0; i < map.length; i++) {
+            char c = (char) (i + 'a');
+            for (int j = 0; j < map[i]; j++) {
+                sb.append(c);
+            }
+        }
+        
+        return sb.toString();
+        
+    }
+
     // 用计数重构方法更简单
     // 建立s的计数map 再根据order读取map 输出StringBuilder
     public String customSortString1(String order, String s) {

@@ -2,6 +2,28 @@ package Meta;
 
 public class S162 {
 
+    // Revisit
+    public int findPeakElement1(int[] nums) {
+        // Binary Search + 顺着坡向上走
+        // 注意Corner Cases
+        int lo = 0, hi = nums.length - 1, mid = (lo + hi) / 2;
+        
+        if (nums.length < 2 || nums[0] > nums[1]) { return 0; }
+        if (nums[hi] > nums[hi - 1]) { return hi; }
+        
+        while (nums[mid] < nums[mid + 1] || nums[mid] < nums[mid - 1]) {
+            if (nums[mid] < nums[mid + 1]) {
+                lo = mid + 1;
+            } else {
+                hi = mid - 1;
+            }
+            mid = (hi + lo) / 2;
+        }
+        
+        return mid;
+        
+    }
+
     public int findPeakElement(int[] nums) {
         
         int mid = 0;

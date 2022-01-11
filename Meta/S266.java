@@ -1,6 +1,9 @@
 package Meta;
 
 public class S266 {
+
+    // Revisited
+    
     public boolean canPermutePalindrome(String s) {
         
         int[] map = new int[26];

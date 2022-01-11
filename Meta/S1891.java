@@ -1,6 +1,37 @@
 package Meta;
 
 public class S1891 {
+
+    // Revisit
+    public int maxLength0(int[] ribbons, int k) {
+        int lo = 1, hi = Integer.MIN_VALUE; 
+        // find max ribbon length
+        for (int r : ribbons) {
+            if (r > hi) { hi = r; }
+        }
+        
+        // Binary Search using lo - hi
+        while (lo <= hi) {
+            int mid = (lo + hi) / 2;
+            
+            // Can it satisfy?
+            int num = 0; // matching k
+            for (int r : ribbons) {
+                num += r/mid;
+            }
+            
+            if (num < k) {
+                hi = mid - 1; // hi是第一个满足条件的（return时小于lo）
+            } else {
+                lo = mid + 1;
+            }
+            
+        }
+        
+        return hi;
+    }
+
+
     // binary search
     public int maxLength(int[] ribbons, int k) {
     

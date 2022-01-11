@@ -2,6 +2,8 @@ package Meta;
 
 public class S766 {
 
+    // Revisit - 只关心微观对角的两个node即可
+
     // 微观算法 更简洁，只比较每一个方块的左上临近的node！
     // 但不知道为什么 耗时一样 占更多空间
     public boolean isToeplitzMatrix1(int[][] matrix) {

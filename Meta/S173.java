@@ -3,6 +3,37 @@ package Meta;
 import java.util.ArrayList;
 import java.util.Stack;
 
+class BSTIteratorR {
+
+    // Revisit
+    // Use 伪 Recursion - Stack
+    // Stack里最上面的就是下一个next的返回值
+    Stack<TreeNode> stack = new Stack<>();
+    
+    public BSTIteratorR(TreeNode root) {
+        TreeNode curr = root;
+        while (curr != null) {
+            stack.push(curr);
+            curr = curr.left;
+        }
+    }
+    
+    public int next() {
+        TreeNode curr = stack.pop();
+        int ret = curr.val;
+        curr = curr.right;
+        while (curr != null) {
+            stack.push(curr);
+            curr = curr.left;
+        }
+        return ret;
+    }
+    
+    public boolean hasNext() {
+        return !stack.isEmpty();
+    }
+}
+
 // O1 Runtime On Space - 构建arrayList
 class BSTIterator1 {
     ArrayList<Integer> nodesSorted;

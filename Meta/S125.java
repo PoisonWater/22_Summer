@@ -2,6 +2,8 @@ package Meta;
 
 public class S125 {
 
+    // Revisit - Character.isLetterOrDigit()
+
     public boolean isPalindrome(String s) {
         int i = 0, j = s.length() - 1;
         
