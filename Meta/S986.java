@@ -3,6 +3,41 @@ package Meta;
 import java.util.Arrays;
 
 public class S986 {
+
+    // Revisit
+    public int[][] intervalIntersectionR(int[][] firstList, int[][] secondList) {
+        int p1 = 0, p2 = 0, b1 = firstList.length - 1, b2 = secondList.length - 1, size = 0;
+        int[][] ret = new int[b1 + b2 + 2][2];
+        
+        while (p1 <= b1 && p2 <= b2) {
+            // 1. Current intervals overlap? Contains start = end overlap
+            int s1 = firstList[p1][0], s2 = secondList[p2][0], e1 = firstList[p1][1], e2 = secondList[p2][1];
+            int start = Math.max(s1, s2), end = Math.min(e1, e2);
+            if (start > end) {
+                if (e1 < e2) {
+                    p1++;
+                } else {
+                    p2++;
+                }
+                continue;
+            }
+            
+            // 2. get merge interval and append
+            ret[size] = new int[]{start, end};
+            size++;
+            
+            // 3. update p1 OR p2
+            if (e1 < e2) {
+                p1++;
+            } else {
+                p2++;
+            }
+        }
+        
+        return Arrays.copyOfRange(ret, 0, size);
+    }
+
+
     public int[][] intervalIntersection(int[][] firstList, int[][] secondList) {
         
         int p1 = 0, p2 = 0;

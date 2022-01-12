@@ -17,6 +17,46 @@ class Node {
 };
 
 public class S708 {
+
+    // Revisit
+    public Node insertR(Node head, int insertVal) {
+        // Corner Cases :
+        if (head == null) {
+            Node ret = new Node(insertVal);
+            ret.next = ret;
+            return ret;
+        } 
+
+        // traverse every Node
+        Node ptr = head;
+        do {
+            // 1. curr <= next
+            if (ptr.val <= ptr.next.val) {
+                if (insertVal >= ptr.val && insertVal <= ptr.next.val) {
+                    Node node = new Node(insertVal, ptr.next);
+                    ptr.next = node;
+                    return head;
+                }
+            // 2. curr > next
+            } else {
+                if (insertVal > ptr.val || insertVal < ptr.next.val) {
+                    Node node = new Node(insertVal, ptr.next);
+                    ptr.next = node;
+                    return head;
+                }
+            }
+            ptr = ptr.next;
+        } while (ptr != head);
+        
+        // TODO: 注意！！！其他的case直接加到开头即可
+        // 3. All other cases: [3, 3, 3, 3] add 0 - Add AnyWhere
+        Node node = new Node(insertVal, ptr.next);
+        ptr.next = node;
+        return head;
+        
+    }
+
+
     public Node insert(Node head, int insertVal) {
         
         // 1. Empty list

@@ -6,6 +6,58 @@ import java.util.List;
 
 public class S1868 {
 
+    // Revisit // TODO: ReDo
+    // 1. Modify Original data
+    // 2. Remember to peek last node added to ret and check whether needs merging
+    // 3. 注意返回目标值是List还是Array！！！
+    public List<List<Integer>> findRLEArrayR(int[][] encoded1, int[][] encoded2) {
+        int p1 = 0, p2 = 0, prevProd = -1;
+        List<List<Integer>> ret = new ArrayList<>();
+        
+        while (p1 < encoded1.length && p2 < encoded2.length) {
+            
+            int[] curr1 = encoded1[p1], curr2 = encoded2[p2];
+            
+            if (!ret.isEmpty() && prevProd == curr1[0] * curr2[0]) {
+                if (curr1[1] == curr2[1]) {
+                    ret.get(ret.size()-1).set(1, curr1[1] + ret.get(ret.size()-1).get(1));
+                    p1++;
+                    p2++;
+                } else if (curr1[1] < curr2[1]) {
+                    ret.get(ret.size()-1).set(1, curr1[1] + ret.get(ret.size()-1).get(1));
+                    p1++;
+                    encoded2[p2][1] -= curr1[1];
+                } else {
+                    ret.get(ret.size()-1).set(1, curr2[1] + ret.get(ret.size()-1).get(1));
+                    p2++;
+                    encoded1[p1][1] -= curr2[1];
+                }
+            } else {
+                // merge and reduce
+                if (curr1[1] == curr2[1]) {
+                    List<Integer> res = Arrays.asList(curr1[0] * curr2[0], curr1[1]);
+                    ret.add(res);
+                    p1++;
+                    p2++;
+                } else if (curr1[1] < curr2[1]) {
+                    List<Integer> res = Arrays.asList(curr1[0] * curr2[0], curr1[1]);
+                    ret.add(res);
+                    p1++;
+                    encoded2[p2][1] -= curr1[1];
+                } else {
+                    List<Integer> res = Arrays.asList(curr1[0] * curr2[0], curr2[1]);
+                    ret.add(res);
+                    p2++;
+                    encoded1[p1][1] -= curr2[1];
+                }
+            }
+            prevProd = curr1[0] * curr2[0];
+        }
+        
+        return ret;
+        
+    }
+
     // 直接在数组上记录traversal, 修改原始数据！！ TODO: Revisit!!
     public List<List<Integer>> findRLEArray1(int[][] encoded1, int[][] encoded2) {
         int p1 = 0, p2=0;

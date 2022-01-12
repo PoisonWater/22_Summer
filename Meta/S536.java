@@ -2,8 +2,10 @@ package Meta;
 
 public class S536 {
 
+    // Revisited
     TreeNode result = new TreeNode();
-    
+
+    // 注意：返回处理过的index 传入要添加的node
     private int build(TreeNode node, int n, String s) {
         
         // 1. Get Value for current node

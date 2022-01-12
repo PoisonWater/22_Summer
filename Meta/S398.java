@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+// Revisited - HahsMap 维护 indecies list
 public class S398 {
 
     // O(1) init, O(1) memory, but O(N) to pick

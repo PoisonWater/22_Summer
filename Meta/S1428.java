@@ -3,6 +3,48 @@ package Meta;
 //     public int get(int row, int col) {}
 //     public List<Integer> dimensions {}
 // };
+
+// Revisit: TODO: Rewrite
+// 这次变量考虑不好 没有选好变量 再做一次！
+class S1428R {
+    private int binSearch(BinaryMatrix bm, int row, int end) {
+        int lo = 0, hi = end;
+        if (bm.get(row, end) == 0) {
+            return -1;
+        }
+        
+        while (lo <= hi) {
+            int mid = (lo + hi) / 2;
+            if (bm.get(row, mid) == 0) {
+                lo = mid + 1;
+            } else {
+                hi = mid - 1;
+            }
+        }
+        return lo;
+    }
+    
+    public int leftMostColumnWithOne(BinaryMatrix binaryMatrix) {
+        int rows = binaryMatrix.dimensions().get(0);
+        int col = binaryMatrix.dimensions().get(1) - 1;
+        
+        // 注意考虑return -1的corner case - 全是0
+        boolean found = false;
+        
+        for (int i = 0; i < rows; i++) {
+            int res = binSearch(binaryMatrix, i, col);
+            // 注意：Termination：col = 0:
+            if (res == 0) { return 0; }
+            
+            found = res == -1 ? found : true; // corner case
+            col = res == -1 ? col : res - 1;
+        }
+        
+        return found ? col + 1 : -1;
+    }
+}
+
+
 public class S1428 {
     // https://leetcode.com/problems/leftmost-column-with-at-least-a-one/solution/
     // Binary Search row by row

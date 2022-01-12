@@ -4,6 +4,52 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class S286 {
+
+    // Revisit - TODO：Graph BFS
+    public void wallsAndGatesR(int[][] rooms) {
+        Queue<int[]> queue = new LinkedList<>();
+        int[][] dirs = new int[][]{{1,0}, {0,1}, {-1,0}, {0,-1}};
+        // List<int[]> gates = new ArrayList<>();
+        
+        // Find gates:
+        for (int i = 0; i < rooms.length; i++) {
+            for (int j = 0; j < rooms[0].length; j++){
+                if (rooms[i][j] == 0) {
+                    queue.offer(new int[]{i, j});
+                }
+            }
+        }
+        
+        // BFS
+        int step = 0;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            step++; // 注意 每一步都更新填充进queue的step 不然会出现错位
+
+            // Generate next step;
+            for (int i = 0; i < size; i++) {
+                
+                // update step
+                int[] curr = queue.poll();
+                
+                // offer next index
+                for (int[] dir : dirs) {
+                    
+                    int[] next = new int[]{curr[0] + dir[0], curr[1] + dir[1]};
+                    
+                    // In bound && INF?
+                    if (next[0] >=0 && next[1] >= 0 && next[0] < rooms.length && next[1] < rooms[0].length
+                        && step < rooms[next[0]][next[1]]) { // 注意这里不用Max比较 只要有更小的就放进来
+                        rooms[next[0]][next[1]] = step;
+                        queue.offer(next);
+                    }
+                    
+                }
+            }
+        }
+    }
+
+    
     public void wallsAndGates(int[][] rooms) {
         
         // BFS

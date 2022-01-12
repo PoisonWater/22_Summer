@@ -2,6 +2,47 @@ package Meta;
 
 public class S1004 {
 
+    // Revisit: TODO: REDO
+    // 贪心 Sliding Window
+    public int longestOnesR(int[] nums, int k) {
+        int ctr = 0, max = 0, lenMax = 0;
+        int p1 = 0, p2 = 0;
+        
+        while(p2 < nums.length) {
+            
+            // next number in is 1
+            if (nums[p2] == 1) {
+                p2++;
+                max++;
+                
+            // next number in is 0
+            } else {
+                // can flip
+                if (ctr < k) {
+                    ctr++;
+                    p2++;
+                    max++;
+                // cannot flip
+                } else {
+                    while (p1 < nums.length && nums[p1] == 1) {
+                        max--;
+                        p1++;
+                    } 
+                    p1++;
+                    p2++;
+                }
+            }
+            
+            lenMax = Math.max(max, lenMax);
+            
+        }
+        
+        return lenMax;
+        
+    }
+
+
+    
     // 贪心 Sliding Window 好一点
     // 先判断复杂的0; 少一点continue会快很多
     public int longestOnes0(int[] nums, int k) {

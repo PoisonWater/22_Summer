@@ -1,5 +1,46 @@
 package Meta;
 
+// Revisit
+class TicTacToeR {
+
+    int[][] rows, cols;
+    int[] diag, antiDiag;
+    int size;
+
+    public TicTacToeR(int n) {
+        // sum of moves for each of the players
+        rows = new int[n][2]; 
+        cols = new int[n][2];
+        diag = new int[2];
+        antiDiag = new int[2];
+        size = n;
+    }
+    
+    // 注意player转index要减1！
+    public int move(int row, int col, int player) {
+        // 1. Row
+        if (++rows[row][player-1] == size) {
+            return player;
+        }
+        // 2. Col
+        if (++cols[col][player-1] == size) {
+            return player;
+        }
+        // 3. Diag
+        if (row == col && ++diag[player-1] == size) {
+            return player;
+        }
+        // 4. AntiDaig
+        if (row + col + 1 == size && ++antiDiag[player-1] == size) {
+            return player;
+        }
+        return 0;
+    }
+    
+}
+
+
+
 class TicTacToe {
     
     int n;

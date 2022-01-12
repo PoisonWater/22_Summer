@@ -2,6 +2,24 @@ package Meta;
 
 public class S1539 {
 
+    // Revisit - TODO: binary search
+    public int findKthPositiveR(int[] arr, int k) {
+        // Find current missing
+        int ctr = arr[0] - 1;
+        // Corner Case
+        if (ctr >= k) { return k; }
+        // Traverse arr
+        for (int i = 1; i < arr.length; i++) {
+            ctr += arr[i] - arr[i-1] - 1;
+            if (ctr >= k) {
+                int miss = arr[i] - 1 - (ctr - k);
+                return miss;
+            }
+        }
+        // out range
+        return arr[arr.length - 1] + k-ctr;        
+    }
+
     // OLogN BinarySearch
     // 注意bin search 模版！
     public int findKthPositive0(int[] arr, int k) {
