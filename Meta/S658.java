@@ -4,6 +4,68 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class S658 {
+
+    // Review
+    // TODO: REWRITE!!!
+    // Binary Search + SLIDING WINDOW!!!
+    // 一定要用Sliding Window！！！
+    public List<Integer> findClosestElementsR(int[] arr, int k, int x) {
+        
+        // // Corner case
+        // if (arr.length == 1) {
+        //     return new int[]{arr[0]};
+        // }
+        
+        // Binary Search
+        int lo = 0, hi = arr.length - 1;
+        
+        while (lo <= hi) {
+            int mid = (lo + hi) / 2;
+            if (arr[mid] < x) {
+                lo = mid + 1;
+            } else {
+                hi = mid - 1;
+            }
+        }
+        // lo is the first number larger or equals to x
+        
+        // 2 Pointers Expand 不可以 要用sliding window
+        // 因为要保持sorted且取k个 - 更简单
+        hi = lo + k - 1;
+        
+        while (hi >= arr.length || (lo - 1 >= 0 && Math.abs(arr[hi] - x) >= Math.abs(arr[lo-1] - x))) {
+            hi--;
+            lo--;
+        }
+
+        // Get return
+        List<Integer> ret = new ArrayList<>();
+        
+        for (int i = lo; i <= hi; i++) {
+            ret.add(arr[i]);
+        }
+        
+        return ret;
+        
+        // 注意 return 的要 sorted
+        // for (int i = 1; i < k; i++) {
+        //     // Out of bound
+        //     if (hi >= arr.length) {
+        //         lo--;
+        //     } else if (lo < 0) {
+        //         hi++;
+        //     } else {
+        //         int numHi = Math.abs(arr[hi] - x), numLo = Math.abs(arr[lo] - x);
+        //         if (numHi >= numLo) {
+        //             lo--;
+        //         } else {
+        //             hi++;
+        //         }
+        //     }
+        // }
+    }
+
+    
     // Binary Search + sliding window
     public List<Integer> findClosestElements(int[] arr, int k, int x) {
         
