@@ -2,6 +2,7 @@ package Meta;
 
 public class S8 {
 
+    // Revisited, TODO: need Rewrite 太繁琐了
     // Simpler handling long integers:
     public static int myAtoi1(String str) {
         if (str == null || str.length() == 0)

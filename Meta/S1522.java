@@ -24,6 +24,43 @@ class Node {
 };
 
 public class S1522 {
+
+    // Revisited
+    int max = 0;
+    
+    // get depth and update max diameter
+    private int dfs(Node root) {
+        
+        // termination
+        if (root == null) { return 0; }
+        
+        // dfs for depth
+        int lmax0 = 0, lmax1 = 0;
+        for (Node n : root.children) {
+            int ld = dfs(n);
+            if (ld > lmax0) {
+                lmax1 = lmax0;
+                lmax0 = ld;
+            } else if (ld > lmax1) {
+                lmax1 = ld;
+            }
+            
+        }
+        
+        // update max
+        max = lmax0 + lmax1 > max ? lmax0 + lmax1 : max;
+        
+        // return depth of previous Node
+        return 1 + lmax0;
+        
+    }
+    
+    public int diameterR(Node root) {
+        dfs(root);
+        return max;
+    }
+
+
     private int maxDepth = 0;
     
     private int depth(Node root) {
