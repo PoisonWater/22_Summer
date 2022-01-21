@@ -3,6 +3,25 @@ package Meta;
 import java.util.Arrays;
 
 class S1762 {
+
+    // R2
+    public int[] findBuildingsR2(int[] heights) {
+        
+        int[] ret = new int[heights.length];
+        int ptr = heights.length - 1; // place to add next bldg
+        int max = 0; // max height
+        
+        for (int i = heights.length - 1; i >=0; i--) {
+            // decide ocean view and update max height
+            if (heights[i] > max) {
+                ret[ptr--] = i;
+                max = heights[i];
+            }
+        }
+        
+        return Arrays.copyOfRange(ret, ptr+1, heights.length);
+        
+    }
         
     // Use a copy of array to store data simulating LinkedList.addFirst();
     // Revisit：注意用 array 和 copyOfRange 代替 List 省时间空间，还能使用addFirst！

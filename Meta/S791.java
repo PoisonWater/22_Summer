@@ -5,6 +5,7 @@ import java.util.Comparator;
 
 public class S791 {
 
+    // R2 建计数表，按照顺序输出！
     // Revisit
     public String customSortString0(String order, String s) {
         // Construct map - storing occurances

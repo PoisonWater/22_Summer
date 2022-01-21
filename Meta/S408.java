@@ -1,6 +1,46 @@
 package Meta;
 
 class S408R {
+
+    // R2 TODO REDO 
+    public boolean validWordAbbreviationR2(String word, String abbr) {
+        int pword = 0, pabbr = 0, num = 0;
+        
+        while (pword < word.length() && pabbr < abbr.length()) {
+            
+            char cw = word.charAt(pword), ca = abbr.charAt(pabbr);
+            
+            // 1. number in pabbr
+            if (Character.isDigit(ca)) {
+                // 1.1 leading 0
+                if (ca == '0') {
+                    return false;
+                }
+                
+                // 1.2 get number
+                num = 0;
+                // 注意 用pointer更直观！！！不要读出来再increment！因为要不断在当前for loop中while loop
+                while (pabbr < abbr.length() && Character.isDigit(abbr.charAt(pabbr))) {
+                    num = (abbr.charAt(pabbr++) - '0') + 10 * num;
+                }
+                
+                // 1.3 add to pword
+                pword += num;
+                
+            } else {
+                if (cw != ca) {
+                    return false;
+                }
+                pword++;
+                pabbr++;
+            }
+            
+        }
+        
+        return pword == word.length() && pabbr == abbr.length();
+        
+    } 
+
     public boolean validWordAbbreviation(String word, String abbr) {
         
         int wPtr = 0, aPtr = 0, ctr = 0;

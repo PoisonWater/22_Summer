@@ -4,6 +4,55 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 
+
+class S987R2 {
+    
+    // R2
+    // int[]: 0 - row, 1 - col, 2 - val
+    private PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> {
+        if (a[1] != b[1]) { return a[1] - b[1]; }
+        if (a[0] != b[0]) { return a[0] - b[0]; }
+        return a[2] - b[2];
+    });
+
+    
+    private void dfs(TreeNode node, int row, int col) {
+        
+        if (node == null) { return; }
+        
+        pq.offer(new int[]{row, col, node.val});
+        
+        dfs(node.left, row + 1, col - 1);
+        dfs(node.right, row + 1, col + 1);
+        
+    }
+    
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+        // DFS Traversal to update priorityQueue
+        dfs(root, 0, 0);
+        
+        // traverse queue to get ret
+        List<List<Integer>> ret = new ArrayList<>();
+        int currCol = pq.peek()[1];
+        List<Integer> currList = new ArrayList<>();
+        ret.add(currList);
+        
+        while (!pq.isEmpty()) {
+            int[] curr = pq.poll();
+            if (currCol != curr[1]) {
+                currCol = curr[1];
+                currList = new ArrayList<>();
+                ret.add(currList);
+            }
+            
+            currList.add(curr[2]);
+        }
+        
+        return ret;
+        
+    }
+}
+
 class TreeNode {
     int val;
     TreeNode left;

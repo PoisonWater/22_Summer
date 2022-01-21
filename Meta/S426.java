@@ -20,6 +20,46 @@ class Node {
 
 class S426 {
 
+    // R2
+    // return node[0] - local head; node[1] - local tail
+    private Node[] sort(Node curr) {
+        // Termination status
+        if (curr == null) { return new Node[]{null, null}; }
+        
+        // dfs
+        Node[] left = sort(curr.left);
+        Node[] right = sort(curr.right);
+        
+        Node head = null, tail = null;
+        if (left[0] == null) {
+            head = curr;
+        } else {
+            head = left[0];
+            left[1].right = curr;
+            curr.left = left[1];
+        }
+        
+        if (right[0] == null) {
+            tail = curr;
+        } else {
+            tail = right[1];
+            curr.right = right[0];
+            right[0].left = curr;
+        }
+        return new Node[]{head, tail};
+        
+    }
+    
+    public Node treeToDoublyList(Node root) {
+        
+        if (root == null) { return null; }
+        
+        Node[] ret = sort(root);
+        ret[0].left = ret[1];
+        ret[1].right = ret[0];
+        return ret[0];
+    }
+
     // Revisit: TODO: 第二次做错辽
     Node head, tail; // represent the circular double list
     

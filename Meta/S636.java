@@ -5,6 +5,47 @@ import java.util.Stack;
 
 public class S636 {
 
+    // R2
+    public int[] exclusiveTimeR2(int n, List<String> logs) {
+        
+        int[] ret = new int[n];
+        // Storing function ID
+        Stack<Integer> stack = new Stack<>();
+        // Storing previous time;
+        int prevTime = 0;
+        
+        for (String log : logs) {
+            String[] curr = log.split(":");
+            
+            // start
+            if (curr[1].equals("start")) {
+                
+                if (!stack.isEmpty()) {
+                    // update ret array
+                    int prevId = stack.peek();
+                    ret[prevId] += Integer.parseInt(curr[2]) - prevTime;
+                    
+                    // update prev Time
+                    prevTime = Integer.parseInt(curr[2]);
+                }
+                
+                stack.push(Integer.parseInt(curr[0]));
+                
+            // end
+            } else {
+                
+                int prevId = stack.pop();
+                ret[prevId] += Integer.parseInt(curr[2]) - prevTime + 1;
+                prevTime = Integer.parseInt(curr[2]) + 1;
+                
+            }
+            
+        }
+        
+        return ret;
+        
+    }
+
     // Revisited
     public int[] exclusiveTime(int n, List<String> logs) {
         

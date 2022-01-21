@@ -6,6 +6,7 @@ import java.util.List;
 
 public class S249 {
 
+    // R2
     // Revisited
     // use String id as key of the hashmap
     // key: 1&1& (abc & bcd)

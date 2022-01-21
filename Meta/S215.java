@@ -2,6 +2,45 @@ package Meta;
 
 import java.util.PriorityQueue;
 
+class S215R2 {
+    // R2
+    private void swap(int[] nums, int p1, int p2) {
+        int tmp = nums[p1];
+        nums[p1] = nums[p2];
+        nums[p2] = tmp;
+    }
+    
+    private int partition(int[] nums, int lo, int hi, int target) {
+                
+        // locate last element - pivot
+        int pivot = nums[hi];
+        
+        // 2 pointers for swap
+        int p1 = lo, p2 = lo;
+        
+        while (p2 < hi) {
+            if (nums[p2] >= pivot) {
+                swap(nums, p1++, p2++);
+            } else {
+                p2++;
+            }
+        }
+        
+        swap(nums, p1, hi);
+        
+        // lo - p1 - hi
+        if (p1 == target) { return nums[p1]; }
+        if (p1 < target) { return partition(nums, p1 + 1, hi, target); }
+        // if (p1 > target) { 
+        return partition(nums, lo, p1 - 1, target);
+        
+    }
+    
+    public int findKthLargest(int[] nums, int k) {
+        return partition(nums, 0, nums.length - 1, k - 1);
+    }
+}
+
 class S215R {
 
     // QuickSelect Revisit: TODO: 重写quickSelect！

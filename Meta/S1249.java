@@ -3,6 +3,40 @@ package Meta;
 import java.util.Stack;
 
 public class S1249 {
+    // R2
+    public String minRemoveToMakeValidR2(String s) {
+        StringBuilder sb = new StringBuilder();
+        int ctr = 0;
+        
+        // 1. eliminate ) leftmost and count ( redundency
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == ')') {
+                if (ctr == 0) {
+                    continue;
+                } else {
+                    ctr--;
+                }
+            } else if (c == '(') {
+                ctr++;
+            }
+            sb.append(c);
+        }
+        
+        // 2. eliminate ( right most
+        
+        for (int i = sb.length() - 1; i >= 0; i--) {
+            if (ctr == 0) { break; }
+            char c = sb.charAt(i);
+            if (c == '(') {
+                sb.deleteCharAt(i);
+                ctr--;
+            }
+        }
+        
+        return sb.toString();
+        
+    }
 
     // Revisited
     // 由左到右删除')' 由右到左删除‘('

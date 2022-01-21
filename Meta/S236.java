@@ -4,6 +4,36 @@ import java.util.HashMap;
 
 class S236R {
 
+    // R2
+    TreeNode lca = null;
+    
+    private boolean dfs(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) {return false;}
+        
+        // 1. p in left and q in right
+        boolean b1 = dfs(root.left, p, q);
+        boolean b2 = dfs(root.right, p, q);
+
+        if (b1 && b2) {
+            lca = root;
+            return false;
+        }
+        
+        // 2. p in left / right and q == root
+        if ((root.val == p.val || root.val == q.val) && (b1 || b2)) {
+            lca = root;
+            return false;
+        }
+        
+        return b1 || b2 || root.val == p.val || root.val == q.val;
+        
+    }
+    
+    public TreeNode lowestCommonAncestorR2(TreeNode root, TreeNode p, TreeNode q) {
+        dfs(root, p, q);
+        return lca;
+    }
+
     // Revisit: 类似 LCA II 原方法更好
     HashMap<TreeNode, TreeNode> map = new HashMap<>();
     

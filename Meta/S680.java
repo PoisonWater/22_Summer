@@ -1,5 +1,37 @@
 package Meta;
 
+
+// R2
+class S680R2{
+    private boolean valid2(String s, int lo, int hi) {
+        while (lo < hi) {
+            if (s.charAt(lo) != s.charAt(hi)) {
+                return false;
+            }
+            lo++;
+            hi--;
+        }
+        return true;
+    }
+    
+    public boolean validPalindrome(String s) {
+        
+        // 2 pointers
+        int lo = 0, hi = s.length() - 1;
+        
+        while (lo < hi) {
+            if (s.charAt(lo) != s.charAt(hi)) {
+                return valid2(s, lo+1, hi) || valid2(s, lo, hi-1);
+            }
+            lo++;
+            hi--;
+        }
+        
+        return true;
+        
+    }
+}
+
 // revisit - 写复杂了 重复利用代码也行 原来写得好
 class S680Revisit {
     boolean second = false;

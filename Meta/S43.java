@@ -1,6 +1,39 @@
 package Meta;
 
 public class S43 {
+
+    // R2
+    // https://leetcode.com/problems/multiply-strings/discuss/17605/Easiest-JAVA-Solution-with-Graph-Explanation
+    public String multiplyR2(String num1, String num2) {
+    
+        int len1 = num1.length(), len2 = num2.length(); 
+        int[] steps = new int[len1 + len2]; // storing values at each indicies
+        
+        // structing steps
+        for (int i = 0; i < len1; i++) {
+            for (int j = 0; j < len2; j++) {
+                steps[i + j] += (num1.charAt(len1 - 1 - i) - '0') * (num2.charAt(len2 - 1 - j) - '0');
+            }
+        }
+        
+        // return
+        int curr = 0;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < steps.length; i++) {
+            curr += steps[i];
+            sb.append(curr % 10);
+            curr /= 10;
+        }
+        
+        // Format
+        sb.reverse();
+        while (sb.length() > 1 && sb.charAt(0) == '0') {
+            sb.deleteCharAt(0);
+        }
+        
+        return sb.toString();
+        
+    }
     
     private void addChar(char[] result, char[] add, int index) {
         int carry = 0, lenR = result.length, i;

@@ -2,6 +2,7 @@ package Meta;
 
 class S31R {
 
+    // R2
     // Revisit: TODO: 不熟悉 还要再练
     public void nextPermutation(int[] nums) {
         // 1. First decreasing element from back: 

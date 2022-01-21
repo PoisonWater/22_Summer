@@ -2,6 +2,45 @@ package Meta;
 
 public class S670 {
 
+    // R2 - TODO redo
+    public int maximumSwapR2(int num) {
+        // 注意 用char array！
+        // 字符串处理问题！！
+        // swap biggest number and the smaller number at front
+        
+        char[] digits = String.valueOf(num).toCharArray();
+        
+        int[] lastOf = new int[10]; // every digit last occurance
+        for (int i = 0; i < lastOf.length; i++) {
+            lastOf[i] = -1;
+        }
+        
+        // construct lastOf array
+        for (int i = 0; i < digits.length; i++) {
+            lastOf[digits[i] - '0'] = i;
+        }
+        
+        // swap biggest number and the smaller number at front
+        for (int i = 9; i >= 0; i--) {
+            if (lastOf[i] == -1) { continue; }
+            
+            // has occurances
+            for (int j = 0; j < lastOf[i]; j++) {
+                if (digits[j] - '0' < i) {
+                    // swap
+                    char tmp = digits[lastOf[i]];
+                    digits[lastOf[i]] = digits[j];
+                    digits[j] = tmp;
+                    
+                    // return
+                    return Integer.parseInt(String.valueOf(digits));
+                    
+                }
+            }
+        }
+        return num;
+    }
+
     // Revisit
     public int maximumSwap1(int num) {
         // Last Index:

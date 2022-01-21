@@ -4,6 +4,48 @@ import java.util.Stack;
 
 class S71 {
 
+    // R2，TODO：注意corner case
+    public String simplifyPathR2(String path) {
+        
+        // Eg. "/home/lib/..//"
+        
+        // Split Path
+        String[] splitted = path.split("/"); // "home; lib; ..;"
+        
+        // Stack for storing results
+        Stack<String> stack = new Stack<>();
+        
+        // loop
+        for (String s : splitted) {
+            
+            // 1. empty || curr dir?
+            if (s.length() == 0 || s.equals(".")) { continue; }
+            
+            // 2. prev dir - 注意corner cases！- empty stack
+            if (s.equals("..")) {
+                if (!stack.isEmpty())
+                    stack.pop();
+                
+            // 3. normal dir name
+            } else {
+                stack.push(s);
+            }
+            
+        }
+        
+        // Construct result;
+        if (stack.isEmpty()) { return "/"; }
+        
+        StringBuilder sb = new StringBuilder();
+        for (String s : stack) {
+            sb.append("/");
+            sb.append(s);
+        }
+        
+        return sb.toString();
+        
+    }
+
     // Revisit
     public String simplifyPath0(String path) {
         // 1. split - "/" "//" - handle empty splitted string

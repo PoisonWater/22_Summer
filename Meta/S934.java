@@ -33,7 +33,7 @@ public class S934 {
             for (int i = 0; i < size; i++) {
                 
                 int[] curr = queue.poll();
-                if (grid[i][j] == 1) {return bLen;}
+                if (grid[curr[0]][curr[1]] == 1) {return bLen;}
                 
                 // all directions
                 for (int[] dir : dirs) {

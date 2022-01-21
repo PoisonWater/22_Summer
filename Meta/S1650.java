@@ -11,6 +11,8 @@ class Node {
 
 public class S1650 {
 
+    // R2
+
     // Revisit ON time
         // If p to LCA : L1; 
         // q to LCA : L2;

@@ -4,6 +4,33 @@ import java.util.HashMap;
 
 class S560 {
 
+    // R2 - TODO: Redo
+    public int subarraySumR2(int[] nums, int k) {
+        // 注意没有preSum array！
+        
+        // key - preSum value; value - count;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int sum = 0, ctr = 0;
+        map.put(0, 1);
+        
+        // construct prefix sum
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            
+            // find k sum
+            if (map.containsKey(sum - k)) {
+                ctr += map.get(sum - k);
+            }
+            
+            // update map
+            map.put(sum, map.getOrDefault(sum, 0) + 1);
+            
+        }
+        
+        return ctr;
+        
+    }
+
     // Revisit
     public int subarraySumR(int[] nums, int k) {
         int ctr = 0, sum = 0; // prefixSum

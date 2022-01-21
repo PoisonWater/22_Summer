@@ -3,6 +3,49 @@ package Meta;
 import java.util.Arrays;
 import java.util.Random;
 
+// R2 - weighted random - prefix sum
+// TODO: Math.random()
+class S528R2 {
+    
+    int[] preSum;
+    int totalSum;
+    Random r = new Random();
+
+    public S528R2(int[] w) {
+        preSum = new int[w.length];
+        
+        for (int i = 0; i < w.length; i++) {
+            totalSum += w[i];
+            preSum[i] = totalSum;
+        }
+        
+        // after construction: presum ends at totalSum
+    }
+    
+    public int pickIndex() {
+        // random number
+        // 用double不用考虑边界情况！！！！Math.random()为[0,1)的double
+        double rand = Math.random() * totalSum;
+        
+        // rand < num[i] - return i; rand == num[i] - return i+1;
+        if (rand < preSum[0]) {return 0;}
+        
+        int lo = 0, hi = preSum.length;
+        
+        // find first position larger or equals to rand
+        while ( lo <= hi ) {
+            int mid = (lo + hi) / 2;
+            if (preSum[mid] < rand) {
+                lo = mid + 1;
+            } else {
+                hi = mid - 1;
+            }
+        }
+        
+        return lo;
+    }
+}
+
 // Revisit:
 // 1. Arrays.binarySearch();
 // 2. PrefixSum

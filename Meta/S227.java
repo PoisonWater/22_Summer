@@ -4,11 +4,71 @@ import java.util.Stack;
 
 public class S227 {
 
+    // R2
+    public int calculateR2(String s) {
+        
+        // All numbers to be added at last
+        Stack<Integer> stack = new Stack<>();
+        
+        char prevOp = '+';
+        int num = 0;
+        
+        // Cases
+        int p = 0;
+        while (p < s.length()) {
+            char c = s.charAt(p++);
+            
+            // space
+            if (c == ' ') {
+                
+            // number
+            } else if (Character.isDigit(c)) {
+                num = num * 10 + (c - '0');
+                
+            // Operand
+            } else {
+                if (prevOp == '*') {
+                    stack.push(stack.pop() * num);
+                } else if (prevOp == '/') {
+                    stack.push(stack.pop() / num);
+                } else if (prevOp == '-') {
+                    stack.push(-num);
+                } else {
+                    stack.push(num);
+                }
+                
+                // Refresh
+                num = 0;
+                prevOp = c;
+            }
+        }
+        
+        // last number
+        if (prevOp == '*') {
+            stack.push(stack.pop() * num);
+        } else if (prevOp == '/') {
+            stack.push(stack.pop() / num);
+        } else if (prevOp == '-') {
+            stack.push(-num);
+        } else {
+            stack.push(num);
+        }
+        
+        // ret
+        int ret = 0;
+        for (Integer i : stack) {
+            ret += i;
+        }
+        
+        return ret;
+        
+    }
+
     // Revisit
     // 用stack模拟运算：
     // 加法直接加；减法加负数；乘除法pop出来算再push；
     // 最后stack里面是要累加的数
-    public int calculate(String s) {
+    public int calculateR(String s) {
         Stack<Integer> stack = new Stack<>();
         char[] in = s.toCharArray();
         int currNum = 0;

@@ -8,6 +8,63 @@ import java.util.Queue;
 
 class S314 {
 
+    // R2
+    public List<List<Integer>> verticalOrderR2(TreeNode root) {
+        
+        List<List<Integer>> ret = new ArrayList<>();
+        
+        // corner case
+        if (root == null) {
+            return ret;
+        }
+        
+        // Hashmap: key - col, val - list of integer
+        HashMap<Integer, List<Integer>> map = new HashMap<>();
+        
+        // 2 queues: Nodes, cols
+        Queue<TreeNode> qNode = new LinkedList<>();
+        Queue<Integer> qCol = new LinkedList<>();
+        
+        // min max
+        int min = 0, max = 0;
+        qNode.offer(root);
+        qCol.offer(0);
+        
+        // BFS
+        while (!qNode.isEmpty()) {
+            int size = qNode.size();
+            for (int i = 0; i < size; i++) {
+                // getting current node info
+                TreeNode currNode = qNode.poll();
+                int currCol = qCol.poll();
+                
+                // update hashMap
+                map.putIfAbsent(currCol, new ArrayList<>());
+                map.get(currCol).add(currNode.val);
+                
+                // Offer children to queues
+                if (currNode.left != null) {
+                    qNode.offer(currNode.left);
+                    qCol.offer(currCol - 1);
+                    min = (currCol - 1) < min ? (currCol - 1) : min;
+                }
+                if (currNode.right != null) {
+                    qNode.offer(currNode.right);
+                    qCol.offer(currCol + 1);
+                    max = (currCol + 1) > max ? (currCol + 1) : max;
+                }
+            }
+        }
+        
+        // generate ret
+        for (int i = min; i <= max; i++) {
+            ret.add(map.get(i));
+        }
+        
+        
+        return ret;
+    }
+
     // Revisit: 用BFS 不用DFS！
     public List<List<Integer>> verticalOrder1(TreeNode root) {
     

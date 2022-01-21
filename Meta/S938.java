@@ -14,6 +14,29 @@ class TreeNode {
 }
 
 class S938 {
+
+    // R2
+    private int dfs(TreeNode root, int lo, int hi) {
+        // Termination
+        if (root == null) { return 0; }
+        
+        // in range
+        if (root.val >= lo && root.val <= hi) {
+            return root.val + dfs(root.left, lo, hi) + dfs(root.right, lo, hi);
+        }
+        
+        // Out of range
+        if (root.val < lo) {
+            return dfs(root.right, lo, hi);
+        }
+        // root.val > hi
+        return dfs(root.left, lo, hi);
+        
+    }
+    
+    public int rangeSumBSTR2(TreeNode root, int low, int high) {
+        return dfs(root, low, high);
+    }
     
     // Revisited
     
