@@ -2,6 +2,40 @@ package Meta;
 
 public class S1539 {
 
+    // R2
+    public int findKthPositiveR2(int[] arr, int k) {
+        // 2 corner cases
+        if (k < arr[0]) { return k; }
+        if (k > arr[arr.length - 1]) { 
+            return k + arr.length;
+        }
+        
+        // TODO: 画数字图太清楚啦
+        // 0 1 2 3 4 index i
+        // 1 3 5 6 9 arr[i]
+        // 0 1 2 2 4 kCurr
+        // kCurr = arr[i] - 1 - i;
+        
+        // Binary Search
+        int lo = 0, hi = arr.length - 1;
+        
+        while (lo <= hi) {
+            int mid = (lo + hi) / 2;
+            int kMid = arr[mid] - mid - 1;
+            
+            if (kMid < k) {
+                lo = mid + 1;
+            } else {
+                hi = mid - 1;
+            }
+        }
+        
+        // hi is the first index whose k smaller than k
+        int kCurr = arr[hi] - 1 - hi;
+        return k - kCurr + arr[hi];
+        
+    }
+
     // Revisit - TODO: binary search
     public int findKthPositiveR(int[] arr, int k) {
         // Find current missing

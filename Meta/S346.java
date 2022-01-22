@@ -3,6 +3,14 @@ package Meta;
 import java.util.LinkedList;
 import java.util.Queue;
 
+// R2
+// data 0  1     1 10    1 10 3      5 10 3
+// ctr  0  1     2       3 (size)    3           3
+// sum  0  1     11      14          
+// ptr  0  1     2       0           3
+
+// Array Queue
+
 // Revisit: 现在能用array了 真牛逼！
 class MovingAverageR {
 

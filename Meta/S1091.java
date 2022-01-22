@@ -3,6 +3,87 @@ package Meta;
 import java.util.LinkedList;
 import java.util.Queue;
 
+// R2
+class S1091R2 {
+    
+    // BFS
+    // Step-by-step 
+    // 0 0 0
+    // 1 1 0
+    // 1 1 0
+    
+    // 1 1
+    // 1 1
+    
+    // 0
+
+    // 如果要求return path list
+    // 在每个节点存一个父节点
+    
+    public int shortestPathBinaryMatrix(int[][] grid) {
+        
+        // corner case
+        // Two corners are 0
+        if (grid[0][0] == 1 || grid[grid.length - 1][grid[0].length - 1] == 1) {
+            return -1;
+        }
+        
+        // visited[][] Init
+        int mLen = grid.length, nLen = grid[0].length;
+        if (mLen == 1 && nLen == 1) { return 1; }
+        
+        boolean[][] visited = new boolean[mLen][nLen];
+        for (int i = 0; i < mLen; i++) {
+            for (int j = 0; j < nLen; j++) {
+                // default false
+                // grid[i][j] == 1, visited
+                if (grid[i][j] == 1) {
+                    visited[i][j] = true;
+                }
+            }
+        }
+        
+        // BFS indices
+        int path = 1;
+        int[][] dirs = new int[][]{{0,1}, {1,0}, {0,-1}, {-1,0}, {1,1}, {1,-1}, {-1,1}, {-1,-1}};
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(new int[]{0, 0});
+        visited[0][0] = true;
+        
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            path++;
+            
+            for (int i = 0; i < size; i++) { // each node inside
+                int[] curr = queue.poll();
+                
+                for (int[] d : dirs) { // eight directions
+                    int[] next = new int[]{ curr[0] + d[0], curr[1] + d[1] };
+                    
+                    // final node?
+                    if (next[0] == mLen - 1 && next[1] == nLen - 1) { return path; }
+                    
+                    // out bound / visited?
+                    if (next[0] < 0 || next[0] >= mLen || next[1] < 0 || next[1] >= nLen || visited[next[0]][next[1]]) {
+                        continue;
+                    }
+                    
+                    // visited and offer
+                    visited[next[0]][next[1]] = true;
+                    queue.offer(next);
+                    
+                }
+                
+            }
+        }
+        
+        return -1;
+        
+    }
+}
+
+
+
 public class S1091 {
 
     // Revisited

@@ -20,6 +20,40 @@ class Node {
     }
 }
 
+// R2
+class Solution {
+    
+    Node[] map = new Node[101];
+    
+    private void build(Node node) {
+        
+        // Termination
+        if (map[node.val] != null) {
+            return;
+        }
+        
+        // Construct self
+        Node curr = new Node(node.val);
+        map[node.val] = curr;
+        
+        // dfs construct children
+        for (Node src : node.neighbors) {
+            build(src);
+            curr.neighbors.add(map[src.val]);
+        }
+        
+    }
+    
+    public Node cloneGraph(Node node) {
+        if (node == null) { return null; }
+        
+        build(node);
+        
+        return map[node.val];
+        
+    }
+}
+
 public class S133 {
 
     // Revisit

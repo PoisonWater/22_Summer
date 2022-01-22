@@ -2,6 +2,7 @@ package Meta;
 
 public class S953 {
 
+    // R2
     // Revisited
     private boolean isSorted(String w1, String w2, String order) {
         for (int i = 0; i < w1.length() && i < w2.length(); i++) {

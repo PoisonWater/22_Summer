@@ -2,6 +2,7 @@ package Meta;
 
 public class S266 {
 
+    // R2
     // Revisited
     
     public boolean canPermutePalindrome(String s) {

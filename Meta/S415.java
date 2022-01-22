@@ -1,6 +1,62 @@
 package Meta;
 
+import java.util.Arrays;
+
 public class S415 {
+
+    // R2
+    public String addStringsR2(String num1, String num2) {
+        char[] ret = new char[num1.length() + num2.length()];
+        
+        int p = 0, len1 = num1.length(), len2 = num2.length();
+        int carry = 0, pret = ret.length - 1;
+        
+        // Matching part
+        while (p < num1.length() && p < num2.length()) {
+            
+            // curr digits
+            char c1 = num1.charAt(len1 - 1 - p), c2 = num2.charAt(len2 - 1 - p);
+            
+            // update carry and ret;
+            ret[pret--] = (char) ((((c1 - '0') + (c2 - '0') + carry) % 10) + '0');
+            carry = ((c1 - '0') + (c2 - '0') + carry) / 10;
+             
+            p++;
+        }
+        
+        // Unmatched part
+        while (p < num1.length()) {
+            // curr digits
+            char c1 = num1.charAt(len1 - 1 - p);
+            
+            // update carry and ret;
+            ret[pret--] = (char) ((((c1 - '0') + carry) % 10) + '0');
+            carry = ((c1 - '0') + carry) / 10;
+             
+            p++;
+        }
+        
+        while (p < num2.length()) {
+            // curr digits
+            char c1 = num2.charAt(len2 - 1 - p);
+            
+            // update carry and ret;
+            ret[pret--] = (char) ((((c1 - '0') + carry) % 10) + '0');
+            carry = ((c1 - '0') + carry) / 10;
+             
+            p++;
+        }
+        
+        // first digit
+        ret[pret] = (char) (carry + '0');
+        
+        while (pret < ret.length && ret[pret] == '0') { pret++; }
+        
+        if (pret == ret.length) { return "0"; }
+        
+        return String.valueOf(Arrays.copyOfRange(ret, pret, ret.length));
+        
+    }
 
     // Revisited
     public String addStrings(String num1, String num2) {

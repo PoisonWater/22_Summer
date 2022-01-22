@@ -6,6 +6,7 @@ import java.util.List;
 
 public class S56 {
 
+    // R2
     // Revisited
     public int[][] merge1(int[][] intervals) {
         

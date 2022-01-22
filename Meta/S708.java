@@ -16,6 +16,58 @@ class Node {
     }
 };
 
+// R2
+class S708R2 {
+    
+    // 3 5  7 0  1
+    // 3 5 [7 0] 1->(3)
+    
+    // 3 3 3 3 3
+    
+    public Node insert(Node head, int insertVal) {
+        
+        // corner case
+        if (head == null) {
+            Node ret = new Node(insertVal);
+            ret.next = ret;
+            return ret;
+        }
+        
+        // loop through the circular list
+        Node ptr = head;
+        do {
+            // special
+            // 3 5 [7 insertVal? 0] 1
+            if (ptr.next.val < ptr.val) {
+                if (insertVal >= ptr.val || insertVal <= ptr.next.val) {
+                    // Insert
+                    Node curr = new Node(insertVal);
+                    curr.next = ptr.next;
+                    ptr.next = curr;
+                    return head;
+                }
+            } else {
+                if (insertVal >= ptr.val && insertVal <= ptr.next.val) {
+                    // Insert
+                    Node curr = new Node(insertVal);
+                    curr.next = ptr.next;
+                    ptr.next = curr;
+                    return head;
+                }
+            }
+            
+            ptr = ptr.next;
+            
+        } while (ptr != head);
+        
+        // Insert
+        Node curr = new Node(insertVal);
+        curr.next = ptr.next;
+        ptr.next = curr;
+        return head;
+    }
+}
+
 public class S708 {
 
     // Revisit

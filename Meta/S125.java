@@ -2,6 +2,10 @@ package Meta;
 
 public class S125 {
 
+    // R2 Character.isLetterOrDigit()
+    // Character.toLowerCase()
+    // 别去掉空格标点再操作， 直接bitwise操作更快
+
     // Revisit - Character.isLetterOrDigit()
 
     public boolean isPalindrome(String s) {

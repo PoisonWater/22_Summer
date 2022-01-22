@@ -3,6 +3,41 @@ package Meta;
 import java.util.ArrayList;
 import java.util.Stack;
 
+class BSTIteratorR2 {
+    
+    Stack<TreeNode> stack = new Stack<>(); 
+
+    public BSTIteratorR2(TreeNode root) {
+        // initialze
+        // 1. add root.left iteratively until reaches null
+        // 2. push all traversed nodes in the stack
+        
+        TreeNode ptr = root;
+        while (ptr != null) {
+            stack.push(ptr);
+            ptr = ptr.left;
+        }
+    }
+    
+    public int next() {
+        // return smallest node
+        // 1. pop node curr
+        // 2. if has curr.right, push
+        // 3. while curr.right has .left push
+        
+        TreeNode curr = stack.pop(), ptr = curr.right;
+        while (ptr != null) {
+            stack.push(ptr);
+            ptr = ptr.left;
+        }
+        return curr.val;
+    }
+    
+    public boolean hasNext() {
+        return !stack.isEmpty();
+    }
+}
+
 class BSTIteratorR {
 
     // Revisit

@@ -2,6 +2,49 @@ package Meta;
 
 public class S1011 {
 
+    // R2
+    private boolean canShip2(int[] weights, int days, int cap) {
+        // can ship?
+        int currDay = 1, load = 0, ptr = 0;
+        while (ptr < weights.length) {
+            // larger than ship
+            if (weights[ptr] > cap) {
+                return false;
+            }
+            // load
+            load += weights[ptr];
+            if (load > cap) {
+                load = weights[ptr]; // 注意load什么，不应该减cap
+                currDay++;
+            }
+            ptr++;
+        }
+        return currDay <= days;
+    }
+    
+    public int shipWithinDaysR2(int[] weights, int days) {
+        
+        // Binary Search
+        int lo = 1, hi = 25_000_000;
+        
+        while (lo <= hi) {
+            int mid = (lo + hi) / 2;
+            
+            boolean isShippable = canShip2(weights, days, mid);
+            
+            // conditions
+            if (isShippable) {
+                hi = mid - 1;
+            } else {
+                lo = mid + 1;
+            }
+            
+        }
+        
+        return lo;
+        
+    }
+
     // Revisit - 注意binary search限制bound！！！
     public int shipWithinDaysR(int[] weights, int days) {
         

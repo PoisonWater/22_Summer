@@ -14,6 +14,7 @@ class Node {
 
 // https://leetcode-cn.com/problems/copy-list-with-random-pointer/solution/fu-zhi-dai-sui-ji-zhi-zhen-de-lian-biao-c2nvs/
 
+// R2
 // Revisited
 public class S138 {
     public Node copyRandomList(Node head) {

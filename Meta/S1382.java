@@ -3,6 +3,49 @@ package Meta;
 import java.util.ArrayList;
 import java.util.List;
 
+// R2
+class S1382R2 {
+    
+    // 1. BST -> List<Integer> (Sorted)
+    // 2. List -> Balanced BST
+    
+    private List<Integer> sorted = new ArrayList<>();
+    
+    private void dfs(TreeNode node) {
+        if (node == null) { return; }
+        
+        dfs(node.left);
+        sorted.add(node.val);
+        dfs(node.right);
+    }
+    
+    private TreeNode build(int lo, int hi) {
+        
+        // Corner Cases
+        if (lo > hi) { return null; }
+        if (lo == hi) { return new TreeNode(sorted.get(lo)); }
+        
+        int mid = (lo + hi) / 2;
+        //                  val              left node           right node
+        return new TreeNode(sorted.get(mid), build(lo, mid - 1), build(mid + 1, hi));
+        
+    }
+    
+    public TreeNode balanceBST(TreeNode root) {
+        
+        // Corner Cases
+        if (root == null) { return root; }
+        
+        // List contructed
+        dfs(root);
+        
+        // reconstruct Balanced BST
+        return build(0, sorted.size() - 1);
+        
+    }
+}
+
+
 // Revisit
 class S1382R {
     private void dfs(List<TreeNode> sorted, TreeNode node) {
