@@ -2,6 +2,60 @@ package Meta;
 
 public class S616 {
 
+    // R2
+    public String addBoldTagR2(String s, String[] words) {
+        
+        boolean[] isBold = new boolean[s.length()]; // char mapped should be bold?
+        
+        for (String word : words) {
+            int ptr = 0;
+            if (word.length() == 0) { continue; }
+            
+            while (ptr < s.length()) {
+                // find match
+                int match = s.indexOf(word, ptr);
+                
+                // ptr
+                if (match < 0) {
+                    break;
+                }
+                
+                // mark bold
+                for (int i = 0; i < word.length(); i++) {
+                    isBold[match + i] = true;
+                }
+                
+                ptr = match + 1;
+            }
+            
+        }
+        
+        // return new string
+        StringBuilder sb = new StringBuilder();
+        boolean inBold = false;
+        
+        for (int i = 0; i < isBold.length; i++) {
+            if (inBold == isBold[i]) {
+                sb.append(s.charAt(i));
+            } else if (inBold && !isBold[i]) {
+                sb.append("</b>");
+                sb.append(s.charAt(i));
+                inBold = false;
+            } else {
+                sb.append("<b>");
+                sb.append(s.charAt(i));
+                inBold = true;
+            }
+        }
+        
+        if (inBold) {
+            sb.append("</b>");
+        }
+        
+        return sb.toString();
+    
+    }
+
     // Revisited
     public String addBoldTag(String s, String[] words) {
         int slen = s.length();

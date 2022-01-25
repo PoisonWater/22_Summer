@@ -5,6 +5,54 @@ import java.util.Queue;
 
 public class S286 {
 
+    // R2
+    // find gates - 0
+    // queue - BFS
+    
+    public void wallsAndGatesR2(int[][] rooms) {
+        
+        
+        // Queue Init
+        Queue<int[]> queue = new LinkedList<>();
+        
+        for (int i = 0; i < rooms.length; i++) {
+            for (int j = 0; j < rooms[0].length; j++) {
+                
+                if (rooms[i][j] == 0) {
+                    queue.offer(new int[]{i, j});
+                }
+                
+            }
+        }
+        
+        // BFS
+        int[][] dirs = new int[][]{{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+        int step = 0;
+        while (!queue.isEmpty()) {
+            step++;
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                
+                int[] curr = queue.poll();
+                
+                for (int[] d : dirs) {
+                    
+                    int[] next = new int[]{curr[0] + d[0], curr[1] + d[1]};
+                    
+                    // Inbound && Unvisited
+                    if (next[0] >= 0 && next[0] < rooms.length && 
+                        next[1] >= 0 && next[1] < rooms[0].length && rooms[next[0]][next[1]] == Integer.MAX_VALUE) {
+                        queue.offer(next);
+                        rooms[next[0]][next[1]] = step;
+                    }
+                    
+                }
+                
+            }
+        }
+        
+    }
+
     // Revisit - TODO：Graph BFS
     public void wallsAndGatesR(int[][] rooms) {
         Queue<int[]> queue = new LinkedList<>();

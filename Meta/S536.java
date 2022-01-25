@@ -2,6 +2,65 @@ package Meta;
 
 class S536R {
 
+    // R2
+    private int build2(TreeNode curr, String s, int ptr) {
+        
+        // curr.val
+        int sign = 1, num = 0;
+        
+        // '-'
+        if (s.charAt(ptr) == '-') {
+            ptr++;
+            sign = -1;
+        }
+        
+        // num
+        while (ptr < s.length() && Character.isDigit(s.charAt(ptr))) {
+            num = num * 10 + (s.charAt(ptr) - '0');
+            ptr++;
+        }
+        
+        curr.val = num * sign;
+        
+        // ended?
+        if (ptr >= s.length()) { return ptr; }
+        if (s.charAt(ptr) == ')') {
+            return ptr;
+        }
+        
+        // curr.left
+        if (s.charAt(ptr) == '(') {
+            curr.left = new TreeNode();
+            ptr = build2(curr.left, s, ptr+1);
+            ptr++;
+            if (ptr >= s.length()) { return ptr; }
+            if (s.charAt(ptr) == ')') {
+                return ptr;
+            }
+            
+            // curr.right
+            if (s.charAt(ptr) == '(') {
+                curr.right = new TreeNode();
+                ptr = build2(curr.right, s, ptr+1);
+                ptr++;
+                return ptr;
+            }
+        }
+        
+        return ptr;
+        
+    }
+    
+    public TreeNode str2treeR2(String s) {
+        if (s.length() == 0) {return null;}
+        
+        TreeNode ret = new TreeNode();
+        build2(ret, s, 0);
+        
+        return ret;
+        
+    }
+
     // Revisit
     // TODO: Rewrite
     private int build(TreeNode node, String s, int ptr) {

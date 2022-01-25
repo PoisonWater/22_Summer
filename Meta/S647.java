@@ -2,6 +2,7 @@ package Meta;
 
 public class S647 {
 
+    // R2
     // Revisit
     // TODO: Minor Rewrite
     public int countSubstringsR(String s) {

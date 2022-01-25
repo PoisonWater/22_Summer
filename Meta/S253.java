@@ -5,6 +5,7 @@ import java.util.PriorityQueue;
 
 public class S253 {
 
+    // R2
     // Revisited: Start time sorted array + End time sorted PQ
     // much simpler! need explanation!
     // https://leetcode.com/problems/meeting-rooms-ii/discuss/67855/Explanation-of-%22Super-Easy-Java-Solution-Beats-98.8%22-from-%40pinkfloyda

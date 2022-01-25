@@ -1,8 +1,17 @@
 package Meta;
-// interface BinaryMatrix {
-//     public int get(int row, int col) {}
-//     public List<Integer> dimensions {}
-// };
+
+import java.util.List;
+
+class BinaryMatrix {
+    public int get(int row, int col) {
+        return 0;
+    }
+    public List<Integer> dimensions() {
+        return null;
+    }
+};
+
+// R2
 
 // Revisit: TODO: Rewrite
 // 这次变量考虑不好 没有选好变量 再做一次！

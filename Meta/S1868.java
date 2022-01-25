@@ -6,6 +6,14 @@ import java.util.List;
 
 public class S1868 {
 
+    // p1                   |
+    //      [[1,3],[2,1],[3,2]]
+    //      [[2,3],[3,2]]
+    // p2           |
+    // p    0 3 4
+    // ret  [2,3] [6,1] [9,2]
+    // preProd 2     6     9
+
     // Revisit // TODO: ReDo
     // 1. Modify Original data
     // 2. Remember to peek last node added to ret and check whether needs merging

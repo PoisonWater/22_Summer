@@ -1,6 +1,23 @@
 package Meta;
 
 public class S238 {
+
+    // R2
+    public int[] productExceptSelfR2(int[] nums) {
+        int[] ret = new int[nums.length];
+        int l = 1;
+        for (int i = 0; i < nums.length; i++) {
+            ret[i] = l;
+            l *= nums[i];
+        }
+        l = 1;
+        for (int i = nums.length - 1; i >= 0 ; i--) {
+            ret[i] *= l;
+            l *= nums[i];
+        }
+        return ret;
+    }
+
     public int[] productExceptSelf(int[] nums) {
         int product = 1, zeroCtr = 0;
         

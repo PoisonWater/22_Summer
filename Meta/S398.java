@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+// R2
 // Revisited - HahsMap 维护 indecies list
 public class S398 {
 

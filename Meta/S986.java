@@ -4,6 +4,13 @@ import java.util.Arrays;
 
 public class S986 {
 
+    // R2
+    //                         |
+    // [[0,2],[5,10],[13,23],[24,25]]
+    // [[1,5],[8,12],[15,24],[25,26]]
+    //                         |
+    // [1,2], [5,5], [8,10], [15,23], [24,24], [25,25]
+
     // Revisit
     public int[][] intervalIntersectionR(int[][] firstList, int[][] secondList) {
         int p1 = 0, p2 = 0, b1 = firstList.length - 1, b2 = secondList.length - 1, size = 0;

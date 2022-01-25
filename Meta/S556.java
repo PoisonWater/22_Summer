@@ -1,7 +1,7 @@
 package Meta;
 
 public class S556 {
-    
+    // R2
     // 123[4]6[5]43 - find first ascending; find smallest bigger element after 'a'
     // 123[5]6[4]43 - swap
     // 123[5][3446] - reverse sub sequence

@@ -2,6 +2,107 @@ package Meta;
 
 import java.util.HashMap;
 
+//R2
+class LRUCacheR2 {
+    
+    // hashmap dLL
+    class Node {
+        int val, key;
+        Node prev;
+        Node next;
+        
+        Node() { }
+        
+        Node(int val, int key) {
+            this.val = val;
+            this.key = key;
+        }
+        
+        Node(int val, int key, Node prev, Node next) {
+            this.val = val;
+            this.key = key;
+            this.prev = prev;
+            this.next = next;
+        }
+    }
+    
+    // Key - Node(val)
+    HashMap<Integer, Node> map = new HashMap<>();
+    
+    // Node 
+    Node head, tail;
+    int cap, size;
+
+    public LRUCacheR2(int capacity) {
+        cap = capacity;
+        size = 0;
+        head = new Node();
+        tail = new Node();
+        head.next = tail;
+        tail.prev = head;
+    }
+    
+    // DLL specific func
+    private void removeNode(Node curr) {
+        curr.prev.next = curr.next;
+        curr.next.prev = curr.prev;
+    }
+    
+    private void insertNode(Node node) {
+        node.next = head.next;
+        node.prev = head;
+        head.next = node;
+        node.next.prev = node;
+    }
+    
+    public int get(int key) {
+        
+        if (!map.containsKey(key)) { return -1; }
+        
+        // retrive value
+        Node node = map.get(key);
+        
+        // make val as first node
+        removeNode(node);
+        insertNode(node);
+        
+        return node.val;
+        
+    }
+    
+    public void put(int key, int value) {
+        
+        // has key
+        if (map.containsKey(key)) {
+            
+            Node curr = map.get(key);
+            curr.val = value;
+            removeNode(curr);
+            insertNode(curr);
+            
+        }
+        
+        // new element
+        else {
+            if (size == cap) {
+                // remove last
+                Node rem = tail.prev;
+                removeNode(rem);
+                map.remove(rem.key);
+                size--;
+            }
+            
+            // add new
+            size++;
+            Node add = new Node(value, key);
+            map.put(key, add);
+            insertNode(add);
+            
+        }
+        
+    }
+}
+
 class LRUCache0 {
     
     // Revisit

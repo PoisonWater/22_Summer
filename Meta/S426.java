@@ -50,7 +50,7 @@ class S426 {
         
     }
     
-    public Node treeToDoublyList(Node root) {
+    public Node treeToDoublyList2(Node root) {
         
         if (root == null) { return null; }
         
